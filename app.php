@@ -11,7 +11,6 @@
 .content:not(:first-child) {
     display: none;
 }
-
 .container{
   width: 100%;
 }
@@ -26,32 +25,60 @@
   display:inline-block;
   border-style: solid;
   border-color: white;
-
 }
-
 .row:after {
   content: "";
   display: table;
   clear: both;
 }
-
 @media screen and (max-width: 992px) {
   .column {
     width: 50%;
   }
 }
-
 @media screen and (max-width: 566px) {
   .column {
     width: 100%;
   }
 }
 .content{
-background-color: #e6eeff
-;
-width: 100%;
+background-color: #e6eeff;
+width:100%;
 padding: 30px;
 }
+
+.content-mobile{
+background-color: #e6eeff;
+width:100%;
+padding: 30px;
+}
+
+.content-tablet{
+background-color: #e6eeff;
+width:100%;
+padding: 30px;
+}
+@media (min-width: 1024px){
+.content-mobile {display: none !important;}
+.content-tablet {display: none !important;}
+
+}
+
+@media only screen and (min-device-width: 569px) and (max-width: 979px) {
+  .content{display: none !important;}
+  .content-mobile {display: none !important;}
+  .content-tablet {display: none ;}
+}
+
+@media only screen and (max-width: 569px) {
+  .content{display: none !important;}
+  .content-tablet {display: none !important;}
+  .content-mobile {display: none ;}
+
+
+
+}
+
 </style>
 </head>
 <body>
@@ -62,59 +89,83 @@ padding: 30px;
 <p>Element 1</p>
 
 
-</button>
-  
+</button>   
+<div class="content-mobile" data-number="1">content1</div>
+
 <button type="button" data-number="2"class="column col-sm-6 col-lg-3 px-2 px-sm-3 mb-3 mb-sm-5 ">
 <p>Element 2</p>
-
-
 </button>
-  
+
+<div class="content-tablet" data-number="1">content1</div>
+<div class="content-tablet" data-number="2">content2</div>
+<div class="content-mobile" data-number="2">content2</div>
+
 <button type="button" data-number="3"class="column col-sm-6 col-lg-3 px-2 px-sm-3 mb-3 mb-sm-5 ">
 
 <p>Element 3</p>
 
 </button>
-  
+<div class="content-mobile" data-number="3">
+<ul>
+<li> raz</li>
+<li> dwa</li>
+</ul>
+
+</div>
+
 <button type="button" data-number="4"class="column col-sm-6 col-lg-3 px-2 px-sm-3 mb-3 mb-sm-5 ">
 
 <p>Element 4</p>
 </button>
+<div class="content-tablet" data-number="3"><ul>
+<li> raz</li>
+<li> dwa</li>
+</ul>
+</div>
+<div class="content-tablet" data-number="4">content4</div>
+<div class="content-mobile" data-number="4">content4</div>
+
+<div class="content" data-number="1">content1</div>
+<div class="content" data-number="2">content2</div>
+<div class="content" data-number="3"><ul>
+<li> raz</li>
+<li> dwa</li>
+</ul></div>
+<div class="content" data-number="4">content4</div>
 </div>
 <div class="contentSection row mx-n2 mx-sm-n3 mb-3">
-   <p class="content" data-number="1">content1</p>
-   <p class="content" data-number="2"> Content of button 2<br>New line<br>New line</p>
-   <p class="content" data-number="3"> Content of button 3</p>
-   <p class="content" data-number="4"> Content of button 4</p>
-   <p class="content" data-number="5"> Content of button 5</p>
-   <p class="content" data-number="6"> Content of button 6</p>
-   <p class="content" data-number="7"> Content of button 7</p>
-   <p class="content" data-number="8">Content of button 8</p>
 </div>
 <div class="row selectSection">
 <button type="button" data-number="5"class="column col-sm-6 col-lg-3 px-2 px-sm-3 mb-3 mb-sm-5 ">
-
 <p>Element 5</p>
-
 </button>
-  
+<div class="content-mobile" data-number="5"> content5</div>
+
 <button type="button" data-number="6"class="column col-sm-6 col-lg-3 px-2 px-sm-3 mb-3 mb-sm-5 ">
-
 <p>Element 6</p>
-
 </button>
-  
+<div class="content-tablet" data-number="5">content5</div>
+<div class="content-tablet" data-number="6">content6</div>
+<div class="content-mobile" data-number="6"> content6</div>
+
 <button type="button" data-number="7"class="column col-sm-6 col-lg-3 px-2 px-sm-3 mb-3 mb-sm-5 ">
 <p>Element 7</p>
-
-
 </button>
+<div class="content-mobile" data-number="7"> content7</div>
+
 <button type="button" data-number="8"class="column col-sm-6 col-lg-3 px-2 px-sm-3 mb-3 mb-sm-5 ">
 <p>Element 8</p>
-
-
 </button>
 
+<div class="content-mobile" data-number="8"> content8</div>
+<div class="content-tablet" data-number="7">content7</div>
+<div class="content-tablet" data-number="8">content8</div>
+<div class="content" data-number="5"> content5</div>
+<div class="content" data-number="6"> content6</div>
+<div class="content" data-number="7"> content7</div>
+<div class="content" data-number="8"> content8</div>
+
+     
 </div>
 </body>
 <script>
@@ -127,12 +178,31 @@ for (let button of Buttons) {
     active.classList.remove("active");
    }
   et.classList.add("active");
-  let allContent = document.querySelectorAll('.content');
-  for (let content of allContent) {
+  let desktop = document.querySelectorAll('.content');
+  for (let content of desktop) {
     if(content.getAttribute('data-number') === button.getAttribute('data-number')) {
       content.style.display = "block";
      }
+     else {
+        content.style.display = "none";
+      }
+    }
 
+  let mobile = document.querySelectorAll('.content-mobile');
+  for (let content of mobile) {
+    if(content.getAttribute('data-number') === button.getAttribute('data-number')) {
+      content.style.display = "block";
+     }
+     else {
+        content.style.display = "none";
+      }
+    }
+  
+  let tablet = document.querySelectorAll('.content-tablet');
+  for (let content of tablet) {
+    if(content.getAttribute('data-number') === button.getAttribute('data-number')) {
+      content.style.display = "block";
+     }
      else {
         content.style.display = "none";
       }
@@ -141,5 +211,4 @@ for (let button of Buttons) {
 }
 </script>
 </html>
-
 
